@@ -11,19 +11,23 @@ class MapTweet extends React.Component {
   }
 
   componentWillMount() {
-    db.collection("locateTweet")
+    db.collection("locateTweet").doc("data")
       .get()
       .then(querySnapshot => {
-        const data = querySnapshot.docs.map(doc => doc.data());
-        console.log(data);
-        this.setState({ locateTweet: data });
+        const data = querySnapshot.data();
+        const tmp = [];
+        for (const [_, d] of Object.entries(data)) {
+          tmp.push(d)
+        }
+        this.setState({ locateTweet: tmp });
       });
+
   }
 
   center = {
     lat: 38.290,
     lng: 138.988,
-    zoom: 6,
+    zoom: 5,
 }
 
   render() {
