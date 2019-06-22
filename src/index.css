@@ -1,5 +1,18 @@
-body {
-  margin: 0;
+html, body {
+  margin: 0px;
   padding: 0;
-  font-family: sans-serif;
+  height: 100%;
+  width: 100%;
+}
+
+#root {
+  width: inherit;
+  height: inherit;
+}
+
+
+.leaflet-container {
+  width: 415px;
+  height: 630px;
+  margin: 0px;
 }
