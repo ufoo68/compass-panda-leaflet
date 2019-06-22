@@ -2,7 +2,7 @@ import React from "react";
 import { db } from "../firebase";
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 
-class SavedList extends React.Component {
+class MapTweet extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -10,7 +10,7 @@ class SavedList extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     db.collection("locateTweet")
       .get()
       .then(querySnapshot => {
@@ -48,4 +48,4 @@ class SavedList extends React.Component {
   }
 }
 
-export default SavedList;
+export default MapTweet;

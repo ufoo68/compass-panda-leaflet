@@ -2,7 +2,7 @@ import Leaflet from 'leaflet'
 import React, { Component } from 'react';
 import './App.css';
 import 'leaflet/dist/leaflet.css';
-import SavedList from "./components/mapTweet"
+import MapTweet from "./components/mapTweet"
 
 Leaflet.Icon.Default.imagePath =
   '//cdnjs.cloudflare.com/ajax/libs/leaflet/1.3.1/images/'
@@ -11,8 +11,7 @@ Leaflet.Icon.Default.imagePath =
 class App extends Component {
   render() {
     return (
-      //<Map/>
-      <SavedList />
+      <MapTweet />
     );
   }
 }
