@@ -17,7 +17,9 @@ class MapTweet extends React.Component {
         const data = querySnapshot.data();
         const tmp = [];
         for (const [_, d] of Object.entries(data)) {
-          tmp.push(d)
+          if (Object.keys(d).length === 3) {
+            tmp.push(d);
+          }
         }
         this.setState({ locateTweet: tmp });
       });
