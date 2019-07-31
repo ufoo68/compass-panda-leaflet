@@ -1,5 +1,4 @@
 import React from "react";
-import { db } from "../firebase";
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
 
 class MapTweet extends React.Component {
@@ -10,19 +9,25 @@ class MapTweet extends React.Component {
     };
   }
 
-  componentWillMount() {
-    db.collection("locateTweet").doc("data")
-      .get()
-      .then(querySnapshot => {
-        const data = querySnapshot.data();
+  componentDidMount() {
+    fetch('https://compasspandaapi.firebaseapp.com/map', {
+      mode: 'cors',
+      headers: {
+        'Access-Control-Allow-Origin':'*'
+      }
+    })
+      .then(response => response)
+      .then((responseJson) => {
+        console.log(responseJson);
         const tmp = [];
-        for (const [_, d] of Object.entries(data)) {
+        for (const [_, d] of Object.entries(responseJson)) {
           if (Object.keys(d).length === 3) {
             tmp.push(d);
           }
         }
         this.setState({ locateTweet: tmp });
       });
+      
 
   }
 
