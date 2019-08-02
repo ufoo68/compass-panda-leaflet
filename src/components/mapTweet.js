@@ -15,11 +15,11 @@ class MapTweet extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     fetch('https://compasspandaapi.firebaseapp.com/map', {
-      mode: 'cors',
       headers: {
-        'Access-Control-Allow-Origin':'*'
+        'Content-Type' : 'application/json',
+        Accept: "application/json"
       }
     })
     .then(response => response.text())
@@ -33,6 +33,9 @@ class MapTweet extends React.Component {
         }
       }
       this.setState({ locateTweet: tmp });
+    })
+    .catch((err) => {
+      alert(err);
     });
     navigator.geolocation.getCurrentPosition((position) => {
       this.setState({
