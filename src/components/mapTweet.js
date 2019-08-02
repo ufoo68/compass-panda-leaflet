@@ -1,5 +1,6 @@
 import React from "react";
 import { Map, TileLayer, Marker, Popup } from 'react-leaflet'
+import toDate from 'normalize-date'
 
 class MapTweet extends React.Component {
   constructor(props) {
@@ -21,12 +22,13 @@ class MapTweet extends React.Component {
         'Access-Control-Allow-Origin':'*'
       }
     })
-    .then(response => response)
+    .then(response => response.text())
+    .then(responseText => JSON.parse(responseText))
     .then((responseJson) => {
-      console.log(responseJson);
       const tmp = [];
-      for (const [_, d] of Object.entries(responseJson)) {
+      for (const [t, d] of Object.entries(responseJson)) {
         if (Object.keys(d).length === 3) {
+          d.timestamp = t;
           tmp.push(d);
         }
       }
@@ -59,9 +61,10 @@ class MapTweet extends React.Component {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       {locateTweet.map(l => (
-        <Marker position={[l.latitude, l.longitude]}>
+        <Marker position={[l.latitude, l.longitude]} key={l.timestamp}>
             <Popup>
-                {l.tweet}
+                {l.tweet}{'\n'}
+                {JSON.stringify(toDate(l.timestamp), {noTime: true})}
             </Popup>
         </Marker>
       ))}
