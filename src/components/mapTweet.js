@@ -66,8 +66,9 @@ class MapTweet extends React.Component {
       {locateTweet.map(l => (
         <Marker position={[l.latitude, l.longitude]} key={l.timestamp}>
             <Popup>
-                {l.tweet}{'\n'}
-                {JSON.stringify(toDate(l.timestamp), {noTime: true})}
+                {l.tweet}
+                {/* TODO: display time stamp */}
+                {/* {JSON.stringify(toDate(l.timestamp), {noTime: true})} */}
             </Popup>
         </Marker>
       ))}
